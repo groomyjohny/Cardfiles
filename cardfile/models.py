@@ -28,7 +28,6 @@ class Artwork(models.Model):
 
 
 class Performance(models.Model):
-    performances = models.IntegerField
     artworks = models.ForeignKey(Artwork, on_delete=models.CASCADE)
     performers = models.ManyToManyField(Performer)
 
