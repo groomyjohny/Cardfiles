@@ -4,36 +4,36 @@ from django.db.models import CASCADE
 char_max_length = 200
 
 
-class Composers(models.Model):
+class Composer(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Genres(models.Model):
+class Genre(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class AuthorsOfText(models.Model):
+class AuthorOfText(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Performers(models.Model):
+class Performer(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Artworks(models.Model):
+class Artwork(models.Model):
     name = models.CharField(max_length=char_max_length)
-    id_composers = models.ManyToManyField(Composers, blank=True, null=True)
-    id_genres = models.ManyToManyField(Genres, blank=True, null=True)
-    id_authors_of_text = models.ManyToManyField(AuthorsOfText, blank=True, null=True)
+    composers = models.ManyToManyField(Composer, blank=True, null=True)
+    genres = models.ManyToManyField(Genre, blank=True, null=True)
+    authors_of_text = models.ManyToManyField(AuthorOfText, blank=True, null=True)
 
 
-class Performances(models.Model):
-    id_performances = models.IntegerField
-    id_artworks = models.ForeignKey(Artworks, on_delete=models.CASCADE)
-    id_performers = models.ManyToManyField(Performers)
+class Performance(models.Model):
+    performances = models.IntegerField
+    artworks = models.ForeignKey(Artwork, on_delete=models.CASCADE)
+    performers = models.ManyToManyField(Performer)
 
 
-class Records(models.Model):
+class Record(models.Model):
     name = models.CharField(max_length=char_max_length)
-    id_performers = models.ManyToManyField(Performances)
+    performers = models.ManyToManyField(Performance)
 
