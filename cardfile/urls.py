@@ -6,5 +6,5 @@ import cardfile.views
 appname = "cardfile"
 
 urlpatterns = [
-    path('', cardfile.views.index, name="index"),
+    
 ]

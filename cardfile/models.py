@@ -1,37 +1,38 @@
 from django.db import models
+from django.db.models import CASCADE
 
 char_max_length = 200
 
-class Composers(models.Model):
-    id = models.AutoField(primary_key=True)
+
+class Composer(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Genres(models.Model):
-    id = models.AutoField(primary_key=True)
+class Genre(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class AuthorsOfText(models.Model):
-    id = models.AutoField(primary_key=True)
+class AuthorOfText(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Performers(models.Model):
-    id = models.AutoField(primary_key=True)
+class Performer(models.Model):
     name = models.CharField(max_length=char_max_length)
 
 
-class Records(models.Model):
-    id = models.AutoField(primary_key=True)
+class Artwork(models.Model):
     name = models.CharField(max_length=char_max_length)
+    composers = models.ManyToManyField(Composer, blank=True, null=True)
+    genres = models.ManyToManyField(Genre, blank=True, null=True)
+    authors_of_text = models.ManyToManyField(AuthorOfText, blank=True, null=True)
 
 
-class Artworks(models.Model):
-    id = models.AutoField(primary_key=True)
+class Performance(models.Model):
+    artworks = models.ForeignKey(Artwork, on_delete=models.CASCADE)
+    performers = models.ManyToManyField(Performer)
+
+
+class Record(models.Model):
     name = models.CharField(max_length=char_max_length)
-    id_composers = models.ForeignKey
-
-
-
+    performers = models.ManyToManyField(Performance)
 
